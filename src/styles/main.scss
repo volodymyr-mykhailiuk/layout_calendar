@@ -1,3 +1,69 @@
+@import "./variables.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
 body {
   margin: 0;
+  counter-reset: day;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $ceil-gap;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: $ceil-width * 7 + $ceil-gap * 5 + $ceil-border * 7;
+
+  & > div {
+    width: $ceil-width;
+    height: $ceil-height;
+
+    border: $ceil-border solid black;
+    
+    background-color: #eee;
+
+    text-align: center;
+    line-height: $ceil-height;
+
+    transition-duration: 0.5s;
+  }
+
+  & > div::after {
+    counter-increment: day;
+    content: counter(day);
+  }
+
+  & > div:hover {
+    background-color: pink;
+
+    transform: translateY(-20px);
+
+    cursor: pointer;
+
+    transition-duration: 0.5s;
+  }
+}
+
+.calendar-28 > div:nth-child(n + 29),
+.calendar-29 > div:nth-child(n + 30),
+.calendar-30 > div:nth-child(n + 31) {
+  display: none;
+}
+
+@each $day, $number in $days {
+  .calendar-#{$day} > div:first-child {
+    margin-left: $ceil-width * $number + $ceil-gap;
+  }
 }
