@@ -31,7 +31,7 @@ body {
     height: $ceil-height;
 
     border: $ceil-border solid black;
-    
+
     background-color: #eee;
 
     text-align: center;
@@ -64,6 +64,6 @@ body {
 
 @each $day, $number in $days {
   .calendar-#{$day} > div:first-child {
-    margin-left: $ceil-width * $number + $ceil-gap;
+    margin-left: $ceil-width * $number + $ceil-gap * $number;
   }
 }
